@@ -106,6 +106,27 @@ let cube = new THREE.Mesh(geometry, material,)
 
 
 /**
+ * COLLADA LOADER
+ **/
+let loader = new THREE.ColladaLoader()
+
+loader.load('../assets/images/3Dhex.dae', ( collada ) => {
+    var animations = collada.animations
+    var avatar = collada.scene
+    avatar.traverse(( node ) => {
+        if ( node.isSkinnedMesh ) {
+            node.frustumCulled = false
+        }
+    })
+    mixer = new THREE.AnimationMixer(avatar)
+	let action = mixer.clipAction(animations[ 0 ]).play()
+	scene.add(avatar)
+})
+
+
+
+
+/**
  * SKYBOX 
  **/
 // let geometry = new THREE.CubeGeometry(10000,10000,10000)
@@ -120,7 +141,7 @@ let cube = new THREE.Mesh(geometry, material,)
 // let cube = new THREE.Mesh(geometry, cubeMaterials)
 
 
-scene.add(cube)
+scene.add(cube, loader)
 
 
 

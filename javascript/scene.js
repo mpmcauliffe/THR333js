@@ -1,3 +1,10 @@
+/****
+ ** 
+ ** This file contains the main effects of this project
+ **
+ ****/
+
+
 
 
 /**
@@ -75,24 +82,24 @@ window.addEventListener('resize', () => {
 /**
  * CREATE GEOMETRY
  **/
-// let geometry = new THREE.BoxGeometry(2,2,2,)
-// let cubeMaterials = []
+let geometry = new THREE.BoxGeometry(2,2,2,)
+let cubeMaterials = []
 
-// for (let i = 1; i < 7; i++) {
-//     cubeMaterials[i-1] = new THREE.MeshPhongMaterial({ 
-//         map: new THREE.TextureLoader().load(`../assets/images/${i}.png`),
-//         side: THREE.DoubleSide, 
-//     })
-//     //cubeMaterials.push(side)
-// }
+for (let i = 1; i < 7; i++) {
+    cubeMaterials[i-1] = new THREE.MeshPhongMaterial({ 
+        map: new THREE.TextureLoader().load(`../assets/images/${i}.png`),
+        side: THREE.DoubleSide, 
+    })
+    //cubeMaterials.push(side)
+}
 
-// //let material = new THREE.MeshBasicMaterial({ color: 0xAAAAFF, wireframe: false, })
-// let material = new THREE.MeshFaceMaterial(cubeMaterials);
+//let material = new THREE.MeshBasicMaterial({ color: 0xAAAAFF, wireframe: false, })
+let material = new THREE.MeshFaceMaterial(cubeMaterials);
 
-// let cube = new THREE.Mesh(geometry, material,)
+let cube = new THREE.Mesh(geometry, material,)
 
-// // let loader = new THREE.ObjectLoader();
-// // loader.load('../assets/models/jupiter.json', (object) => { scene.add(object) })
+// let loader = new THREE.ObjectLoader();
+// loader.load('../assets/models/jupiter.json', (object) => { scene.add(object) })
 
 
 
@@ -101,16 +108,18 @@ window.addEventListener('resize', () => {
 /**
  * SKYBOX 
  **/
-let geometry = new THREE.CubeGeometry(10000,10000,10000)
-let cubeMaterials = []
-for (let i = 1; i < 7; i++) {
-    cubeMaterials[i-1] = new THREE.MeshBasicMaterial({ 
-            map: new THREE.TextureLoader().load(`../assets/images/skybox/${i}.png`),
-            side: THREE.DoubleSide,
-    })
-}
-let cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials)
-let cube = new THREE.Mesh(geometry, cubeMaterials)
+// let geometry = new THREE.CubeGeometry(10000,10000,10000)
+// let cubeMaterials = []
+// for (let i = 1; i < 7; i++) {
+//     cubeMaterials[i-1] = new THREE.MeshBasicMaterial({ 
+//             map: new THREE.TextureLoader().load(`../assets/images/skybox/${i}.png`),
+//             side: THREE.DoubleSide,
+//     })
+// }
+// let cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials)
+// let cube = new THREE.Mesh(geometry, cubeMaterials)
+
+
 scene.add(cube)
 
 

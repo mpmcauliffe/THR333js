@@ -11,35 +11,30 @@
  * GLOBALS AND GENERAL SETTINGINGS
  **/
 let scene       = new THREE.Scene()
-let camera      = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
+let camera      = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, .001, 4)
 let renderer    = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
-controls = new THREE.OrbitControls(camera, renderer.domElement)
+controls = new THREE.OrbitControls(camera, renderer.domElement);
 
-camera.position.z = 3
-camera.position.y = .5;
-
-
+// camera.position.z = -2
+// camera.position.y = .6;
+camera.position.set(0, .4, .5);
+//cameraControls = new THREEx.DragPanControls(camera)
 
 
 /**
- * STATS 
+ * COLLADA LOADER
  **/
-(function() { 
-    var script=document.createElement('script')
-    script.onload = function() {
-        var stats = new Stats()
-        document.body.appendChild(stats.dom)
-        requestAnimationFrame(function loop() {
-            stats.update()
-            requestAnimationFrame(loop)
-        })
-    }
-    script.src = '//mrdoob.github.io/stats.js/build/stats.min.js'
-    document.head.appendChild(script)
-})()
+
+let loader = new THREE.ColladaLoader()
+
+loader.load('/models/3Dhex-1/3Dhex.dae', (collada) => {
+    let hexon = collada.scene
+    scene.add(hexon)
+})
+
 
 
 
@@ -47,12 +42,13 @@ camera.position.y = .5;
 /**
  * LIGHTING
  **/
-let ambientLight = new THREE.AmbientLight(0xFFFFFF, 5)
+let ambientLight = new THREE.AmbientLight(0xFFFFFF, 1)
 scene.add(ambientLight)
-let light1 = new THREE.PointLight(0xFF0048, 4, 50)
-let light2 = new THREE.PointLight(0x004448, 3, 50)
-let light3 = new THREE.PointLight(0x08FF08, 3, 50)
-scene.add(light1, light2, light3,)
+let light1 = new THREE.PointLight(0x78C0E0, 9, 100)
+let light2 = new THREE.PointLight(0xE09F3E, 9, 100)
+let light3 = new THREE.PointLight(0x9E2A2B, 9, 100)
+let light4 = new THREE.PointLight(0x53917E, 9, 100)
+scene.add(light1, light2, light3, light4)
 
 let directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)
 directionalLight.position.set(2,1,0)
@@ -75,6 +71,7 @@ window.addEventListener('resize', () => {
     camera.aspect = width / height
     camera.updateProjectionMatrix()
 })
+
 
 
 
@@ -104,32 +101,6 @@ let cube = new THREE.Mesh(geometry, material,)
 
 
 
-
-/**
- * COLLADA LOADER
- **/
-let textureLoader = new THREE.TextureLoader()
-let map = textureLoader.load('../assets/images/hexTexture.png')
-let hexMaterial = new THREE.MeshLambertMaterial({map: map})
-
-let loader = new THREE.ColladaLoader()
-
-loader.load('/models/3Dhex.dae', (collada) => {
-    // collada.traverse((node) => {
-    //     if(node.isMesh) {
-    //         node.material = hexMaterial
-    //     }
-    // })
-
-    //let hexon = collada.scene
-    //hexon.position.y(-5)
-    scene.add(collada.scene)
-    //let hexMaterial = new THREE.MeshFaceMaterial(cubeMaterials)
-})
-
-
-
-
 /**
  * SKYBOX 
  **/
@@ -145,9 +116,12 @@ loader.load('/models/3Dhex.dae', (collada) => {
 // let cubeMaterial = new THREE.MeshFaceMaterial(cubeMaterials)
 // let cube = new THREE.Mesh(geometry, cubeMaterials)
 
+//scene.add(cube)
 
 
-
+/**
+ * STATS 
+ **/
 
 
 
@@ -169,6 +143,10 @@ let update = () => {
     light3.position.x = Math.sin(time * 0.3) * 30
     light3.position.y = Math.cos(time * 0.5) * 40
     light3.position.z = Math.sin(time * 0.7) * 30
+
+    light4.position.x = Math.cos(time * 0.4) * 40
+    light4.position.y = Math.cos(time * 0.6) * 30
+    light4.position.z = Math.sin(time * 0.5) * 40
 }
 
 //draw scene
@@ -185,5 +163,19 @@ let GameLoop = () => {
     update()
     render()
 }
-GameLoop()
+GameLoop();
 
+
+(function() { 
+    var script=document.createElement('script')
+    script.onload = function() {
+        var stats = new Stats()
+        document.body.appendChild(stats.dom)
+        requestAnimationFrame(function loop() {
+            stats.update()
+            requestAnimationFrame(loop)
+        })
+    }
+    script.src = '//mrdoob.github.io/stats.js/build/stats.min.js'
+    document.head.appendChild(script)
+})()

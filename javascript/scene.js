@@ -47,7 +47,7 @@ camera.position.y = .5;
 /**
  * LIGHTING
  **/
-let ambientLight = new THREE.AmbientLight(0xFFFFFF, 10)
+let ambientLight = new THREE.AmbientLight(0xFFFFFF, 5)
 scene.add(ambientLight)
 let light1 = new THREE.PointLight(0xFF0048, 4, 50)
 let light2 = new THREE.PointLight(0x004448, 3, 50)
@@ -82,21 +82,21 @@ window.addEventListener('resize', () => {
 /**
  * CREATE GEOMETRY
  **/
-// let geometry = new THREE.BoxGeometry(10,10,10,)
-// let cubeMaterials = []
+let geometry = new THREE.BoxGeometry(10,10,10,)
+let cubeMaterials = []
 
-// for (let i = 1; i < 7; i++) {
-//     cubeMaterials[i-1] = new THREE.MeshPhongMaterial({ 
-//         map: new THREE.TextureLoader().load(`../assets/images/${i}.png`),
-//         side: THREE.DoubleSide, 
-//     })
-//     //cubeMaterials.push(side)
-// }
+for (let i = 1; i < 7; i++) {
+    cubeMaterials[i-1] = new THREE.MeshPhongMaterial({ 
+        map: new THREE.TextureLoader().load(`../assets/images/${i}.png`),
+        side: THREE.DoubleSide, 
+    })
+    //cubeMaterials.push(side)
+}
 
-// //let material = new THREE.MeshBasicMaterial({ color: 0xAAAAFF, wireframe: false, })
-// let material = new THREE.MeshFaceMaterial(cubeMaterials);
+//let material = new THREE.MeshBasicMaterial({ color: 0xAAAAFF, wireframe: false, })
+let material = new THREE.MeshFaceMaterial(cubeMaterials);
 
-// let cube = new THREE.Mesh(geometry, material,)
+let cube = new THREE.Mesh(geometry, material,)
 
 // let loader = new THREE.ObjectLoader();
 // loader.load('../assets/models/jupiter.json', (object) => { scene.add(object) })
@@ -108,11 +108,23 @@ window.addEventListener('resize', () => {
 /**
  * COLLADA LOADER
  **/
+let textureLoader = new THREE.TextureLoader()
+let map = textureLoader.load('../assets/images/hexTexture.png')
+let hexMaterial = new THREE.MeshLambertMaterial({map: map})
+
 let loader = new THREE.ColladaLoader()
 
-loader.load('/models/hexon.dae', (collada) => {
-    let hexon = collada.scene
-    scene.add(hexon)
+loader.load('/models/3Dhex.dae', (collada) => {
+    // collada.traverse((node) => {
+    //     if(node.isMesh) {
+    //         node.material = hexMaterial
+    //     }
+    // })
+
+    //let hexon = collada.scene
+    //hexon.position.y(-5)
+    scene.add(collada.scene)
+    //let hexMaterial = new THREE.MeshFaceMaterial(cubeMaterials)
 })
 
 
@@ -134,7 +146,7 @@ loader.load('/models/hexon.dae', (collada) => {
 // let cube = new THREE.Mesh(geometry, cubeMaterials)
 
 
-//scene.add(cube)
+
 
 
 

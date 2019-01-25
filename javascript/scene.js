@@ -11,12 +11,13 @@
  * GLOBALS AND GENERAL SETTINGINGS
  **/
 let scene       = new THREE.Scene()
-let camera      = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, .001, 4)
+let camera      = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.001, 4)
 let renderer    = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 controls = new THREE.OrbitControls(camera, renderer.domElement);
+controls.enabled = false
 
 // camera.position.z = -2
 // camera.position.y = .6;

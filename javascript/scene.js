@@ -11,7 +11,7 @@
  * GLOBALS AND GENERAL SETTINGINGS
  **/
 let scene       = new THREE.Scene()
-let camera      = new THREE.PerspectiveCamera(35, window.innerWidth / window.innerHeight, 0.001, 4)
+let camera      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.001, 4)
 let renderer    = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -21,7 +21,7 @@ controls.enabled = false
 
 // camera.position.z = -2
 // camera.position.y = .6;
-camera.position.set(0, .4, .5);
+camera.position.set(0, .43, .5);
 //cameraControls = new THREEx.DragPanControls(camera)
 
 

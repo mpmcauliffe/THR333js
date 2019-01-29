@@ -11,19 +11,20 @@
  * GLOBALS AND GENERAL SETTINGINGS
  **/
 let scene       = new THREE.Scene()
-let camera      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.001, 4)
+let camera      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, .1, 10)
 let renderer    = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 controls = new THREE.OrbitControls(camera, renderer.domElement);
-controls.enabled = false
+//controls.enabled = false
 
 // camera.position.z = -2
 // camera.position.y = .6;
-camera.position.set(0, .43, .5);
+camera.position.set(0, .4, .5)
+//camera.lookAt(new THREE.Vector3(0,0,0))
 //cameraControls = new THREEx.DragPanControls(camera)
-
+//camera.position.z = 5
 
 /**
  * COLLADA LOADER
@@ -32,9 +33,22 @@ let loader = new THREE.ColladaLoader()
 
 loader.load('/models/3Dhex-1/3Dhex.dae', (collada) => {
     let hexon = collada.scene
+    console.log(hexon)
     scene.add(hexon)
 })
-
+let loader2 = new THREE.ColladaLoader()
+loader2.options.convertUpAxis = true;
+loader2.load('/models/3Dhex-3/3Dhex.dae', (collada) => {
+    let hexon = collada.scene
+    // hexon.position.copy( camera.position );
+    // hexon.rotation.copy( camera.rotation );
+    // hexon.updateMatrix();
+    // hexon.translateZ( -.1 );
+    //hexon.position(0,0,0)
+    //hexon.scale.set(12,6,1)
+    console.log(hexon)
+    scene.add(hexon)
+})
 
 
 /**
@@ -42,10 +56,10 @@ loader.load('/models/3Dhex-1/3Dhex.dae', (collada) => {
  **/
 let ambientLight = new THREE.AmbientLight(0xFFFFFF, 1)
 //scene.add(ambientLight)
-let light1 = new THREE.PointLight(0x78C0E0, 8, 60)
-let light2 = new THREE.PointLight(0xE09F3E, 8, 60)
-let light3 = new THREE.PointLight(0x9E2A2B, 8, 60)
-let light4 = new THREE.PointLight(0x53917E, 8, 60)
+let light1 = new THREE.PointLight(0x78C0E0, 15, 60)
+let light2 = new THREE.PointLight(0xE09F3E, 15, 60)
+let light3 = new THREE.PointLight(0x9E2A2B, 15, 60)
+let light4 = new THREE.PointLight(0x53917E, 15, 60)
 scene.add(light1, light2, light3, light4)
 
 let directionalLight = new THREE.DirectionalLight(0xFFFFFF, 1)

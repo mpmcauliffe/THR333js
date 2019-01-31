@@ -11,7 +11,7 @@
  * GLOBALS AND GENERAL SETTINGINGS
  **/
 let scene       = new THREE.Scene()
-let camera      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, .1, 10)
+let camera      = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, .0001, 10)
 let renderer    = new THREE.WebGLRenderer()
 
 renderer.setSize(window.innerWidth, window.innerHeight)
@@ -21,7 +21,7 @@ controls = new THREE.OrbitControls(camera, renderer.domElement);
 
 // camera.position.z = -2
 // camera.position.y = .6;
-camera.position.set(0, .4, .5)
+camera.position.set(0, -.4, .01)
 //camera.lookAt(new THREE.Vector3(0,0,0))
 //cameraControls = new THREEx.DragPanControls(camera)
 //camera.position.z = 5
@@ -29,13 +29,13 @@ camera.position.set(0, .4, .5)
 /**
  * COLLADA LOADER
  **/
-let loader = new THREE.ColladaLoader()
+// let loader = new THREE.ColladaLoader()
 
-loader.load('/models/3Dhex-1/3Dhex.dae', (collada) => {
-    let hexon = collada.scene
-    console.log(hexon)
-    scene.add(hexon)
-})
+// loader.load('/models/3Dhex-1/3Dhex.dae', (collada) => {
+//     let hexon = collada.scene
+//     console.log(hexon)
+//     scene.add(hexon)
+// })
 let loader2 = new THREE.ColladaLoader()
 loader2.options.convertUpAxis = true;
 loader2.load('/models/3Dhex-3/3Dhex.dae', (collada) => {
